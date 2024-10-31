@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".AddMajor">
+
+    <TextView
+        android:id="@+id/tv_v_addMajor_errorName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Error: major name already in use"
+        android:textColor="#FF0000"
+        app:layout_constraintStart_toStartOf="@+id/et_v_major_majorName"
+        app:layout_constraintTop_toBottomOf="@+id/et_v_major_majorName" />
+
+    <TextView
+        android:id="@+id/textView6"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="1dp"
+        android:text="Add Major"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/textView12"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="19dp"
+        android:layout_marginTop="12dp"
+        android:text="Major Prefix"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_v_addMajor_errorName" />
+
+    <Button
+        android:id="@+id/btn_v_major_addMajor"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="40dp"
+        android:text="Add Major"
+        app:layout_constraintStart_toStartOf="@+id/et_v_major_majorPrefix"
+        app:layout_constraintTop_toBottomOf="@+id/et_v_major_majorPrefix" />
+
+    <Button
+        android:id="@+id/btn_v_major_back"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="6dp"
+        android:text="Go Back"
+        app:layout_constraintEnd_toEndOf="@+id/btn_v_major_addMajor"
+        app:layout_constraintTop_toBottomOf="@+id/btn_v_major_addMajor" />
+
+    <EditText
+        android:id="@+id/et_v_major_majorName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="13dp"
+        android:layout_marginTop="2dp"
+        android:ems="10"
+        android:inputType="text"
+        app:layout_constraintStart_toEndOf="@+id/textView11"
+        app:layout_constraintTop_toBottomOf="@+id/textView6" />
+
+    <EditText
+        android:id="@+id/et_v_major_majorPrefix"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="text"
+        app:layout_constraintStart_toStartOf="@+id/tv_v_addMajor_errorName"
+        app:layout_constraintTop_toTopOf="@+id/textView12" />
+
+    <TextView
+        android:id="@+id/textView11"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="18dp"
+        android:layout_marginTop="22dp"
+        android:text="Major Name"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+</androidx.constraintlayout.widget.ConstraintLayout>
