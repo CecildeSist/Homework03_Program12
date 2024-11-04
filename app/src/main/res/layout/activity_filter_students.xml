@@ -11,9 +11,9 @@
         android:id="@+id/textView13"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginEnd="2dp"
         android:text="SEARCH"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/et_filter_u"
         app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
@@ -21,90 +21,78 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="2dp"
-        android:layout_marginEnd="5dp"
+        android:layout_marginEnd="6dp"
         android:ems="10"
         android:hint="Username"
         android:inputType="text"
-        app:layout_constraintEnd_toEndOf="@+id/textView13"
+        app:layout_constraintEnd_toEndOf="@+id/et_filter_f"
         app:layout_constraintTop_toBottomOf="@+id/textView13" />
 
     <EditText
         android:id="@+id/et_filter_f"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="1dp"
-        android:layout_marginTop="44dp"
         android:ems="10"
         android:hint="First Name"
         android:inputType="text"
-        app:layout_constraintStart_toStartOf="@+id/et_filter_u"
-        app:layout_constraintTop_toTopOf="@+id/et_filter_u" />
+        app:layout_constraintStart_toStartOf="@+id/et_filter_l"
+        app:layout_constraintTop_toBottomOf="@+id/et_filter_u" />
 
     <EditText
         android:id="@+id/et_filter_l"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="1dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginEnd="19dp"
         android:ems="10"
         android:hint="Last Name"
         android:inputType="text"
-        app:layout_constraintBottom_toTopOf="@+id/et_filter_major"
-        app:layout_constraintStart_toStartOf="@+id/et_filter_major" />
-
-    <EditText
-        android:id="@+id/et_filter_major"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="44dp"
-        android:layout_marginEnd="3dp"
-        android:ems="10"
-        android:hint="Major"
-        android:inputType="text"
-        app:layout_constraintEnd_toEndOf="@+id/et_filter_gpaLow"
+        app:layout_constraintEnd_toStartOf="@+id/txt_filter_error"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/et_filter_f" />
 
     <EditText
         android:id="@+id/et_filter_gpaLow"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="2dp"
-        android:layout_marginBottom="1dp"
+        android:layout_marginStart="28dp"
+        android:layout_marginTop="34dp"
         android:ems="10"
         android:hint="GPA Lower Bound"
         android:inputType="numberDecimal"
-        app:layout_constraintBottom_toTopOf="@+id/et_filter_gpaUpper"
-        app:layout_constraintStart_toStartOf="@+id/et_filter_gpaUpper" />
+        app:layout_constraintStart_toStartOf="@+id/spn_filter"
+        app:layout_constraintTop_toBottomOf="@+id/textView15" />
 
     <EditText
         android:id="@+id/et_filter_gpaUpper"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="49dp"
         android:ems="10"
         android:hint="GPA Upper Bound"
         android:inputType="numberDecimal"
-        app:layout_constraintStart_toStartOf="@+id/lv_filter"
-        app:layout_constraintTop_toBottomOf="@+id/et_filter_major" />
+        app:layout_constraintStart_toStartOf="@+id/et_filter_gpaLow"
+        app:layout_constraintTop_toBottomOf="@+id/et_filter_gpaLow" />
 
     <Button
         android:id="@+id/btn_filter_filter"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="3dp"
+        android:layout_marginStart="36dp"
         android:layout_marginTop="22dp"
+        android:layout_marginEnd="37dp"
         android:text="Filter"
-        app:layout_constraintStart_toStartOf="@+id/btn_filter_back"
+        app:layout_constraintEnd_toEndOf="@+id/txt_filter_error"
+        app:layout_constraintStart_toEndOf="@+id/et_filter_f"
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
         android:id="@+id/btn_filter_back"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
         android:layout_marginTop="46dp"
-        android:layout_marginEnd="38dp"
         android:text="Go Back"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/btn_filter_filter"
         app:layout_constraintTop_toTopOf="@+id/btn_filter_filter" />
 
     <ListView
@@ -112,12 +100,52 @@
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginStart="1dp"
-        android:layout_marginTop="1dp"
+        android:layout_marginTop="8dp"
         android:layout_marginEnd="1dp"
         android:layout_marginBottom="1dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/et_filter_gpaUpper" />
+
+    <TextView
+        android:id="@+id/txt_filter_error"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="24dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="8dp"
+        android:text="Error: GPA outside of valid range (must be between 0 and 6)"
+        android:textColor="#FF0000"
+        android:textSize="12sp"
+        app:layout_constraintBottom_toTopOf="@+id/et_filter_gpaLow"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/et_filter_l"
+        app:layout_constraintTop_toBottomOf="@+id/btn_filter_back" />
+
+    <TextView
+        android:id="@+id/textView15"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="1dp"
+        android:layout_marginTop="44dp"
+        android:layout_marginEnd="222dp"
+        android:text="Majors"
+        android:textSize="10sp"
+        app:layout_constraintEnd_toStartOf="@+id/txt_filter_error"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/et_filter_l" />
+
+    <Spinner
+        android:id="@+id/spn_filter"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="3dp"
+        android:layout_marginTop="2dp"
+        android:layout_marginEnd="4dp"
+        app:layout_constraintBottom_toTopOf="@+id/et_filter_gpaLow"
+        app:layout_constraintEnd_toEndOf="@+id/textView13"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView15" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

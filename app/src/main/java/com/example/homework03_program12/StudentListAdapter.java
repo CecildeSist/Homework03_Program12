@@ -13,6 +13,10 @@ public class StudentListAdapter extends BaseAdapter {
     Context context;
     ArrayList<Student> listOfStudents;
 
+    public StudentListAdapter() {
+        
+    }
+
     public StudentListAdapter(Context c, ArrayList<Student> ls) {
         context = c;
         listOfStudents = ls;

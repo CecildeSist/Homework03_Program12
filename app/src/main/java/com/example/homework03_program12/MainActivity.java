@@ -14,6 +14,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ListView;
 
@@ -60,23 +61,24 @@ public class MainActivity extends AppCompatActivity {
         checkAllTableCounts();
 
         Intent cameFrom = getIntent();
+
         if (cameFrom.getSerializableExtra("studentData") != null) {
             //If something was passed from AddStudent, add it to the list of students
             Student studentData = (Student) cameFrom.getSerializableExtra("studentData");
             listOfStudents.add(studentData);
             Log.d("INFO FROM ADD STUDENT", listOfStudents.get(listOfStudents.size() - 1).getuName());
         }
-        else {
-            //Otherwise, add dummy data (DONE)
-            addDummyDataToArrayList();
-        }
 
         //button listeners (DONE)
         mainAddClick();
         mainFindClick();
 
-        //fill list view (ONE)
+        //fill list view (DONE)
         fillListView();
+
+        listViewUpdateStudent();
+
+        Log.d("size of student array list:", listOfStudents.size() + "");
     }
 
     private void checkAllTableCounts() {
@@ -123,8 +125,33 @@ public class MainActivity extends AppCompatActivity {
         listOfStudents.add(newStudent);
     }
 
-    private void fillListView() {
-        mainAdapter = new StudentListAdapter(this, listOfStudents);
+    public void fillListView() {
+        mainAdapter = new StudentListAdapter(this, dbHelper.mainActivityStudents());
         lv_j_main_students.setAdapter(mainAdapter);
+    }
+
+    public void listViewUpdateStudent() {
+        lv_j_main_students.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                Log.d("Successfully clicked?", "YES");
+                //Pass all contents of listOfStudents to UpdateStudent
+                Intent mainToUpdate = new Intent(MainActivity.this, UpdateStudent.class);
+                //Send clicked Student to UpdateStudent
+                Student toUpdate = (Student) adapterView.getItemAtPosition(i);
+                mainToUpdate.putExtra("studentToUpdate", toUpdate);
+                mainToUpdate.putExtra("key", listOfStudents);
+                startActivity(mainToUpdate);
+            }
+        });
+    }
+
+    public void listViewDeleteStudent() {
+        lv_j_main_students.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+            @Override
+            public boolean onItemLongClick(AdapterView<?> adapterView, View view, int i, long l) {
+                return false;
+            }
+        });
     }
 }

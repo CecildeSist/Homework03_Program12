@@ -4,7 +4,9 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Arrays;
 
+//NOTE TO SELF making this class static is impossible, so doing that WON'T make the students displayed in mainActivity persistent
 public class Student implements Serializable {
+    //NOTE TO SELF making these objects public didn't make the students displayed in mainActivity persistent
     String uName, fName, lName, eMail;
     Integer age;
     Float GPA;

@@ -49,6 +49,9 @@ public class AddStudent extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_add_student);
+
+        dbHelper = new DatabaseHelper(this);
+
         //Connect GUI elements
         et_j_student_fName = findViewById(R.id.et_v_student_fName);
         et_j_student_lName = findViewById(R.id.et_v_student_lName);
@@ -71,10 +74,8 @@ public class AddStudent extends AppCompatActivity {
         btn_j_student_back = findViewById(R.id.btn_v_student_back);
 
         //Next step: populate spinner (NOT DONE)
-        addStudentAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, Student.studentMajor.getAllStudentMajors());
+        addStudentAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, dbHelper.populateSpinner());
         spn_j_student_majors.setAdapter(addStudentAdapter);
-
-        dbHelper = new DatabaseHelper(this);
 
         Intent cameFrom = getIntent();
         Bundle majorPassedToMe = cameFrom.getExtras();
@@ -158,6 +159,10 @@ public class AddStudent extends AppCompatActivity {
                 }
                 else if (dbHelper.usernameExists(uname)) {
                     txt_j_student_errorUName.setText("Error: Username already in use");
+                    txt_j_student_errorUName.setVisibility(View.VISIBLE);
+                }
+                else if (gpa < 0 || gpa > 6) {
+                    txt_j_student_errorUName.setText("Error: GPA must be valid (between 0 and 6");
                     txt_j_student_errorUName.setVisibility(View.VISIBLE);
                 }
                 else {
