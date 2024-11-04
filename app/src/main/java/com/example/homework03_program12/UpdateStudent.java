@@ -28,6 +28,7 @@ public class UpdateStudent extends AppCompatActivity {
     Button btn_update_student, btn_update_back;
     DatabaseHelper dbHelper;
     TextView updateError;
+    TextView titleAndUname;
 
     ArrayAdapter<String> majorsOnUpdatePage;
 
@@ -46,6 +47,7 @@ public class UpdateStudent extends AppCompatActivity {
         spn_update_major = findViewById(R.id.spn_v_update);
         btn_update_student = findViewById(R.id.btn_update);
         btn_update_back = findViewById(R.id.btn_update_back);
+        titleAndUname = findViewById(R.id.txt_update_titleAndU);
 
         dbHelper = new DatabaseHelper(this);
 
@@ -66,6 +68,7 @@ public class UpdateStudent extends AppCompatActivity {
             et_update_gpa.setText(stuToUpdate.getGPA().toString());
             updateError.setText("Current Major: " + stuToUpdate.getMajor().toString());
             updateError.setVisibility(View.VISIBLE);
+            titleAndUname.setText("Update Student: " + stuToUpdate.getuName().toString());
         }
 
         updateBackListener();
@@ -108,15 +111,16 @@ public class UpdateStudent extends AppCompatActivity {
 
                 //Step 1: retrieve new values (NOTE TO SELF must test)
 
-
                 newF = et_update_fname.getText().toString();
                 newL = et_update_lname.getText().toString();
                 newE = et_update_email.getText().toString();
                 newAge = Integer.parseInt(et_update_age.getText().toString());
                 newGPA = Float.parseFloat(et_update_gpa.getText().toString());
                 //NOTE TO SELF new major is declared above in the updateSpinnerListener function, stored under a string named updateStudentMajorName
+                Log.d("new values created?", "YES");
 
                 if (cameFrom.getSerializableExtra("studentToUpdate") != null) {
+                    Log.d("if statement triggered?", "YES");
                     Student stuToUpdate = (Student) cameFrom.getSerializableExtra("studentToUpdate");
                     if (et_update_fname.getText().toString().isEmpty() || et_update_lname.getText().toString().isEmpty() || et_update_email.getText().toString().isEmpty() || et_update_age.getText().toString().isEmpty() || et_update_gpa.getText().toString().isEmpty()) {
                         updateError.setText("Error: please fill out all boxes");
@@ -126,8 +130,11 @@ public class UpdateStudent extends AppCompatActivity {
                         updateError.setVisibility(View.VISIBLE);
                     }
                     else {
+                        Log.d("if else chain returns second else?", "YES");
                         updateError.setText("Current Major: ");
                         updateError.setVisibility(View.INVISIBLE);
+                        titleAndUname.setText("Update Student:");
+
 
                         //Step 2: replace student in arraylist with new student (NOTE TO SELF must test)
 
@@ -142,9 +149,10 @@ public class UpdateStudent extends AppCompatActivity {
                         updatedStudent.setGPA(newGPA);
                         updatedStudent.setMajor(updateStudentMajorName);
 
-                        Log.d("indexNumber", MainActivity.listOfStudents.indexOf(stuToUpdate) + "");
+                        Log.d("indexNumber", MainActivity.listOfStudents.indexOf(stuToUpdate) + 1 + "");
 
-                        MainActivity.listOfStudents.set(MainActivity.listOfStudents.indexOf(stuToUpdate), updatedStudent);
+                        MainActivity.listOfStudents.set(MainActivity.listOfStudents.indexOf(stuToUpdate) + 1, updatedStudent);
+                        Log.d("Update statement run?", "YES (note: not guaranteed to have worked");
 
                         //Step 3: replace student in database. NOTE TO SELF must pass Student stuToUpdate, Strings (newF, newL, newE), Integer newAge,
                         //Float newGPA, and String updateStudentMajorName (NOTE TO SELF must test)

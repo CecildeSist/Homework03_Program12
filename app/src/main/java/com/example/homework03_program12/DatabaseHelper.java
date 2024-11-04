@@ -18,7 +18,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public static final String students_table_name = "Students";
 
     public DatabaseHelper(Context c) {
-        super(c, database_name, null, 40);
+        super(c, database_name, null, 49);
     }
 
     @Override
@@ -141,6 +141,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         db.execSQL("INSERT INTO " + students_table_name + " (username, fname, lname, email, age, GPA, major) VALUES ('" + newStudent.getuName() + "','" + newStudent.getfName() + "','" + newStudent.getlName() + "','" + newStudent.geteMail() + "','" + newStudent.getAge() + "','" + newStudent.getGPA() + "','" + newStudent.getMajor() + "');");
 
         db.close();
+
+        Log.d("number of student entries in database:", countRecordsFromTable(students_table_name) + "");
     }
 
     //Check if a given major name is already in the students table
@@ -393,6 +395,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public void replaceStudentTakeThree(Student oldStudentData, String newF, String newL, String newE, Integer newAge, Float newGPA, String newMajor) {
         //Step 1: get writeable instance of database
         SQLiteDatabase db = this.getWritableDatabase();
+        Log.d("Database created?", "YES");
 
         String oldUsername = oldStudentData.getuName();
         String oldFName = oldStudentData.getfName();
@@ -401,10 +404,12 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         Integer oldAge = oldStudentData.getAge();
         Float oldGPA = oldStudentData.getGPA();
         String oldMajor = oldStudentData.getMajor();
+        Log.d("old values obtained?", "YES");
 
         //Step 2: Create SQLite statement for query. NOTE TO SELF check if you need a space after the value for oldUsername
-        String queryStatement = "SELECT fname, lname, email, age, GPA, major FROM " + students_table_name + " WHERE username = " + oldUsername + ";";
+        String queryStatement = "SELECT fname, lname, email, age, GPA, major FROM " + students_table_name + " WHERE username = '" + oldUsername + "';";
         Cursor cursor = db.rawQuery(queryStatement, null);
+        Log.d("query run?", "YES");
 
         //Run if queryCursor returns a result
         if (cursor.moveToFirst()) {
@@ -486,5 +491,16 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
         db.close();
         return arrayListStu;
+    }
+
+    //Deleting a student from the database
+    public void deleteStudent (Student studentToDelete) {
+        //Get writeable database
+        SQLiteDatabase db = this.getWritableDatabase();
+        String selectStatement = "DELETE FROM " + students_table_name + " WHERE username = '" + studentToDelete.getuName().toString() + "';";
+        Cursor cursor = db.rawQuery(selectStatement, null);
+
+        //STEP 2: remove student from arraylist in MainActivity (NOT DONE)
+        MainActivity.listOfStudents.remove(studentToDelete);
     }
 }

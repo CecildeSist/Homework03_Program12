@@ -60,6 +60,27 @@ public class MainActivity extends AppCompatActivity {
         //For testing (DONE)
         checkAllTableCounts();
 
+        if (listOfStudents.size() == 0) {
+            Student studentOne = new Student("CdeSist", "Cecil", "deSist", "CdeSist@tumblr.com", 23, 2.8F, "App Development");
+            listOfStudents.add(studentOne);
+            Student studentTwo = new Student("STired", "Sally", "Tored", "STired@yahoo.com", 25, 3.0F, "Psychology");
+            listOfStudents.add(studentTwo);
+            Student studentThree = new Student("QAsque", "Quentin", "Asque", "QAsque@yahoo.com", 27, 1.3F, "Psychology");
+            listOfStudents.add(studentThree);
+            Student studentFour = new Student("FdeSist", "Fanny", "deSist", "FdeSist@yahoo.com", 26, 3.1F, "App Development");
+            listOfStudents.add(studentFour);
+            Student studentFive = new Student("STop", "Samuel", "Top", "STop@yahoo.com", 22, 4.0F, "App Development");
+            listOfStudents.add(studentFive);
+            Student studentSix = new Student("YMom", "Yvonne", "Mom", "YMom@Yahoo.com", 29, 3.7F, "Chemistry");
+            listOfStudents.add(studentSix);
+            Student stuSeven = new Student("BOlogy", "Beth", "Ology", "BOlogy@yahoo.txt", 29, 3.7F, "Chemistry");
+            listOfStudents.add(stuSeven);
+            Student stuEight = new Student("GPhic", "Ginny", "Phic", "GPhic@yahoo.com", 24, 1.5F, "Graphic Design");
+            listOfStudents.add(stuEight);
+            Student stuNine = new Student("EGlish", "Ebony", "Glish", "EGlish@yahoo.com", 28, 2.0F, "English");
+            listOfStudents.add(stuNine);
+        }
+
         Intent cameFrom = getIntent();
 
         if (cameFrom.getSerializableExtra("studentData") != null) {
@@ -104,27 +125,6 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
-    private void addDummyDataToArrayList() {
-        Student newStudent = new Student("CdeSist", "Cecil", "deSist", "CdeSist@tumblr.com", 23, 2.8F, Student.studentMajor.getStudentMajorAt(0));
-        listOfStudents.add(newStudent);
-        newStudent = new Student("STired", "Sally", "Tired", "STired@yahoo.com", 25, 3.0F, Student.studentMajor.getStudentMajorAt(1));
-        listOfStudents.add(newStudent);
-        newStudent = new Student("QAsque", "Quentin", "Asque", "QAsque@yahoo.com", 27, 1.3F, Student.studentMajor.getStudentMajorAt(1));
-        listOfStudents.add(newStudent);
-        newStudent = new Student("FdeSist", "Fanny", "deSist", "FdeSist@yahoo.com", 26, 3.1F, Student.studentMajor.getStudentMajorAt(0));
-        listOfStudents.add(newStudent);
-        newStudent = new Student("STop", "Samuel", "Top", "STop@yahoo.com", 22, 4.0F, Student.studentMajor.getStudentMajorAt(0));
-        listOfStudents.add(newStudent);
-        newStudent = new Student("YMom", "Yvonne", "Mom", "YMom@yahoo.com", 29, 3.7F, Student.studentMajor.getStudentMajorAt(2));
-        listOfStudents.add(newStudent);
-        newStudent = new Student("BOlogy", "Beth", "Ology", "BOlogy@yahoo.com", 29, 3.7F, Student.studentMajor.getStudentMajorAt(3));
-        listOfStudents.add(newStudent);
-        newStudent = new Student("GPhic", "Ginny", "Phic", "GPhic@yahoo.com", 24, 1.5F, Student.studentMajor.getStudentMajorAt(4));
-        listOfStudents.add(newStudent);
-        newStudent = new Student("EGlish", "Ebony", "Glish", "EGlish@yahoo.com", 28, 2.0F, Student.studentMajor.getStudentMajorAt(5));
-        listOfStudents.add(newStudent);
-    }
-
     public void fillListView() {
         mainAdapter = new StudentListAdapter(this, dbHelper.mainActivityStudents());
         lv_j_main_students.setAdapter(mainAdapter);
@@ -150,7 +150,10 @@ public class MainActivity extends AppCompatActivity {
         lv_j_main_students.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
             @Override
             public boolean onItemLongClick(AdapterView<?> adapterView, View view, int i, long l) {
-                return false;
+                //NOT DONE
+                Student studentDeleted = (Student) adapterView.getItemAtPosition(i);
+                dbHelper.deleteStudent(studentDeleted);
+                return true;
             }
         });
     }

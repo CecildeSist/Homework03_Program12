@@ -8,11 +8,11 @@
     tools:context=".UpdateStudent">
 
     <TextView
-        android:id="@+id/textView35"
+        android:id="@+id/txt_update_titleAndU"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="2dp"
-        android:text="Update Student"
+        android:text="Update Student:"
         app:layout_constraintBottom_toTopOf="@+id/et_v_update_fname"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
