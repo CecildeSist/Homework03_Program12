@@ -90,6 +90,10 @@ public class MainActivity extends AppCompatActivity {
             Log.d("INFO FROM ADD STUDENT", listOfStudents.get(listOfStudents.size() - 1).getuName());
         }
 
+        if (cameFrom.getSerializableExtra("Bundle_Key") != null) {
+            mainAdapter.notifyDataSetChanged();
+        }
+
         //button listeners (DONE)
         mainAddClick();
         mainFindClick();
@@ -100,6 +104,7 @@ public class MainActivity extends AppCompatActivity {
         listViewUpdateStudent();
 
         Log.d("size of student array list:", listOfStudents.size() + "");
+
     }
 
     private void checkAllTableCounts() {
@@ -142,18 +147,6 @@ public class MainActivity extends AppCompatActivity {
                 mainToUpdate.putExtra("studentToUpdate", toUpdate);
                 mainToUpdate.putExtra("key", listOfStudents);
                 startActivity(mainToUpdate);
-            }
-        });
-    }
-
-    public void listViewDeleteStudent() {
-        lv_j_main_students.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
-            @Override
-            public boolean onItemLongClick(AdapterView<?> adapterView, View view, int i, long l) {
-                //NOT DONE
-                Student studentDeleted = (Student) adapterView.getItemAtPosition(i);
-                dbHelper.deleteStudent(studentDeleted);
-                return true;
             }
         });
     }

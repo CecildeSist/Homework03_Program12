@@ -160,6 +160,7 @@ public class UpdateStudent extends AppCompatActivity {
                         Log.d("Update successful?", "YES");
 
                         Intent goFromUpdateToMain = new Intent(UpdateStudent.this, MainActivity.class);
+                        goFromUpdateToMain.putExtra("Bundle_Key", "UpdateStudent");
                         startActivity(goFromUpdateToMain);
                     }
                 }

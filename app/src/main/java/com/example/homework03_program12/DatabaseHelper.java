@@ -18,7 +18,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public static final String students_table_name = "Students";
 
     public DatabaseHelper(Context c) {
-        super(c, database_name, null, 49);
+        super(c, database_name, null, 57);
     }
 
     @Override
@@ -413,23 +413,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
         //Run if queryCursor returns a result
         if (cursor.moveToFirst()) {
-            //Replace fname
-            String updateStatement = "UPDATE " + students_table_name + " SET fname =  replace (fname, " + oldFName + ", " + newF + ");";
-            cursor = db.rawQuery(updateStatement, null);
-            //Replace lname
-            updateStatement = "UPDATE " + students_table_name + " SET lname =  replace (lname, " + oldLName + ", " + newL + ");";
-            cursor = db.rawQuery(updateStatement, null);
-            //Replace email
-            updateStatement = "UPDATE " + students_table_name + " SET email =  replace (email, " + oldEmail + ", " + newE + ");";
-            cursor = db.rawQuery(updateStatement, null);
-            //Replace age
-            updateStatement = "UPDATE " + students_table_name + " SET age =  replace (age, " + oldAge + ", " + newAge + ");";
-            cursor = db.rawQuery(updateStatement, null);
-            //Replace GPA
-            updateStatement = "UPDATE " + students_table_name + " SET GPA =  replace (GPA, " + oldGPA + ", " + newGPA + ");";
-            cursor = db.rawQuery(updateStatement, null);
-            //Replace major name
-            updateStatement = "UPDATE " + students_table_name + " SET major =  replace (major, " + oldMajor + ", " + newMajor + ");";
+            String updateStatement = "UPDATE " + students_table_name + " SET fname = '" + newF + "', lname = '" + newL + "', email = '" + newE + "', age = " + newAge + ", GPA = " + newGPA + ", major = '" + newMajor + "' WHERE username = '" + oldUsername + "';";
             cursor = db.rawQuery(updateStatement, null);
 
             //Log.d statement to ensure everything works
@@ -500,7 +484,9 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         String selectStatement = "DELETE FROM " + students_table_name + " WHERE username = '" + studentToDelete.getuName().toString() + "';";
         Cursor cursor = db.rawQuery(selectStatement, null);
 
+        Integer position = MainActivity.listOfStudents.indexOf(studentToDelete);
+
         //STEP 2: remove student from arraylist in MainActivity (NOT DONE)
-        MainActivity.listOfStudents.remove(studentToDelete);
+        MainActivity.listOfStudents.remove(position);
     }
 }
